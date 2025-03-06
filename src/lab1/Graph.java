@@ -1,51 +1,77 @@
 package lab1;
 
 import java.io.BufferedReader;
+import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 
-public class Graph {
-    private int[][] matrix;
+//src\test2.txt
+public abstract class Graph {
+    int numberVexs;
+    int[][] adjMatrix;
+    String path = "src/test2.txt";
+    public Graph() {
+    }
     
-//    public boolean loadGraph(String pathFile) throws IOException {
-//        BufferedReader bufferedReader = new BufferedReader(new FileReader(pathFile));
-//        String line = bufferedReader.readLine();
-//        int row = 0;
-//        matrix = new int[line.length()/2 + 1][line.length()/2 + 1];
-//        while (line != null){
-//            String[]tmp = line.split(" ");
-//            for (int i = 0; i< matrix.length;i++){
-//                matrix[row][i] = Integer.parseInt(tmp[i]);
-//            }
-//            row++;
-//            line = bufferedReader.readLine();
-//        }
-//        return true;
-//    }
-//
-//    public String printMatrix(int [][]source){
-//        String result= "";
-//        for (int i = 0; i < matrix.length; i++) {
-//            for (int j = 0; j < matrix[i].length; j++) {
-//                result += matrix[i][j] + " ";
-//            }
-//            result += "\n";
-//        }
-//        return result;
-//    }
-//
-//    public String printMatrix(){
-//        String result= "";
-//        for (int i = 0; i < matrix.length; i++) {
-//            for (int j = 0; j < matrix[i].length; j++) {
-//                result += matrix[i][j] + " ";
-//            }
-//            result += "\n";
-//        }
-//        return result;
-//    }
+    public Graph(int numberVexs, int[][] adjMatrix) {
+        this.numberVexs = numberVexs;
+        this.adjMatrix = adjMatrix;
+    }
     
-    public static void main(String[] args) {
+    public boolean loadGraph(String pathFile) throws IOException {
+        File input = new File(pathFile);
+        if (!input.exists()) {
+            System.out.println("Not correct! File not found");
+            return false;
+        } else {
+            BufferedReader reader = new BufferedReader(new FileReader(pathFile));
+            //read first line in file -> number of Vex
+            String firstLine = reader.readLine();
+            this.numberVexs = Integer.parseInt(firstLine);
+            this.adjMatrix = new int[numberVexs][numberVexs];
+            
+            String line = "";
+            int indexLines = 0;
+            while ((line = reader.readLine()) != null) {
+                String[] values = line.split(" ");
+                for (int i = 0; i < numberVexs; i++) {
+                    this.adjMatrix[indexLines][i] = Integer.parseInt(values[i]);
+                }
+                indexLines++;
+            }
+            reader.close();
+            return true;
+        }
+    }
     
+    public void printMatrix(){
+        for (int i = 0; i < numberVexs; i++) {
+            for (int j = 0; j < numberVexs; j++) {
+                System.out.print(adjMatrix[i][j] + " ");
+            }
+            System.out.println();
+        }
+    }
+    
+    public abstract boolean checkValid();
+    
+    public abstract void addEdge(int[][]matrix, int v1, int v2);
+    
+    public abstract void removeEdge(int[][]matrix,int v1, int v2);
+    
+    public abstract int deg(int v);
+    
+    public abstract int sumDeg();
+    
+    public int numVexs() {
+        return numberVexs;
+    }
+    
+    public int numberEdges() {
+        int result = 0;
+        for (int i = 0; i < numberVexs; i++) {
+             result += deg(i);
+        }
+        return result/2;
     }
 }
