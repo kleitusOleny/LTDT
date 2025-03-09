@@ -9,7 +9,7 @@ import java.io.IOException;
 public abstract class Graph {
     int numberVexs;
     int[][] adjMatrix;
-    String path = "src/test2.txt";
+    String path = "src/test1.txt";
     public Graph() {
     }
     
@@ -74,4 +74,10 @@ public abstract class Graph {
         }
         return result/2;
     }
+    
+    public abstract boolean checkConnect();
+    
+    //Lab2
+    
+    public abstract void diTimCacDinhLienThong(int vexs);
 }

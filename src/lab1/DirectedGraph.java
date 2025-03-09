@@ -52,4 +52,14 @@ public class DirectedGraph extends Graph {
         }
         return res;
     }
+    
+    @Override
+    public boolean checkConnect() {
+        return false;
+    }
+    
+    @Override
+    public void diTimCacDinhLienThong(int vexs) {
+    
+    }
 }
