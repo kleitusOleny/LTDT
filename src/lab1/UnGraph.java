@@ -57,26 +57,16 @@ public class UnGraph extends Graph {
         return result;
     }
     
-    //Lab2
     @Override
-    public boolean checkConnect(){
+    public int numberEdges() {
+        int result = 0;
         for (int i = 0; i < numberVexs; i++) {
-            int sum = 0;
-            for (int j = 0; j < numberVexs; j++) {
-                sum += adjMatrix[i][j];
-            }
-            if (sum == 0) return false;
+            result += deg(i);
         }
-        return true;
+        return result/2;
     }
     
-    @Override
-    public void diTimCacDinhLienThong(int vexs) {
-        if(vexs < 0 || vexs > numberVexs ) System.out.println("Something when wrong! Invalid vertex");
-        else {
-            for (int i = 0; i < numberVexs; i++) {
-                System.out.println();
-            }
-        };
-    }
+    
+    //Lab2
+    
 }

@@ -27,10 +27,17 @@ public class MainGraph {
 //            System.out.println("Number Edges: " + unGraph.numberEdges());
 //        }
         
-        if (unGraph.loadGraph(unGraph.path)){
-            unGraph.printMatrix();
-            System.out.println(unGraph.checkConnect());
+        if (unGraph.loadGraph("src/test1.txt")){
+            System.out.println("====Print Matrix===");
+//            unGraph.printMatrix();
+//            System.out.println(unGraph.checkConnect());
+//            unGraph.resetAll();
+//            unGraph.DFSGraphRecursive(0);
+//            unGraph.printList();
+//            unGraph.resetAll();
+//            unGraph.xetTinhLienThong();
             
+            System.out.println(unGraph.BFS(1));
         }
     }
 }

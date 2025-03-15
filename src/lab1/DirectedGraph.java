@@ -37,8 +37,8 @@ public class DirectedGraph extends Graph {
     public int deg(int v) {
         int res = 0;
         for (int i = 0; i < numberVexs; i++) {
-            for (int j = 0; j < numberVexs/2; j++) {
-                res += adjMatrix[v][i];
+            for (int j = 0; j < numberVexs; j++) {
+                res += adjMatrix[v][j] + adjMatrix[i][v];
             }
         }
         return res;
@@ -54,12 +54,18 @@ public class DirectedGraph extends Graph {
     }
     
     @Override
-    public boolean checkConnect() {
-        return false;
+    public int numberEdges() {
+        int res = 0;
+        for (int i = 0; i < numberVexs; i++) {
+            for (int j = 0; j < numberVexs; j++) {
+                if (adjMatrix[i][j] != 0){
+                    res += adjMatrix[i][j];
+                }
+            }
+        }
+        return res;
     }
     
-    @Override
-    public void diTimCacDinhLienThong(int vexs) {
+    //Lab2
     
-    }
 }
